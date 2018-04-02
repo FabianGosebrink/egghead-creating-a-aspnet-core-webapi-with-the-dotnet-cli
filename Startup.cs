@@ -23,6 +23,7 @@ namespace creating_a_aspnet_core_webapit_with_the_dotnet_cli
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors();
             services.AddMvc();
         }
 
@@ -34,6 +35,9 @@ namespace creating_a_aspnet_core_webapit_with_the_dotnet_cli
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseCors(builder => builder
+            .WithOrigins("http://localhost:4200")
+            .AllowAnyMethod());
             app.UseMvc();
         }
     }
